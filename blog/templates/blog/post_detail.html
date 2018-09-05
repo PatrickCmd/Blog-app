@@ -1,0 +1,24 @@
+{% extends "blog/base.html"  %}
+
+{% block title %}
+    {{ post.title|capfirst }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="section-inner clearfix">
+
+        <h1>{{ post.title|capfirst }}</h1>
+        <p class="post-info">
+            {% include 'blog/post_info.html' %}
+            | <span><a href="{% url 'cadmin:post_update' post.pk %}">Edit</a></span>
+        </p>
+        <p>
+            {{ post.content|safe }}
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

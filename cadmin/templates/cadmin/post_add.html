@@ -1,0 +1,79 @@
+{{% extends "cadmin/base_admin.html" %}
+
+{% block title %}
+    Add New Post - {{ block.super }}
+{% endblock %}
+
+{% block main %}
+
+    <div class="main">
+
+        <p>&#187; <a href="{% url 'cadmin:post_list' %}">All Posts</a> &#187; Add Post</p>
+
+        <h3>Add Post</h3>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <p>
+            {{ form.non_field_errors }}
+        </p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.media }}
+            <table>
+                <tr>
+                    <td>{{ form.title.label_tag }}</td>
+                    <td>
+                        {{ form.title.errors }}
+                        {{ form.title }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form.content.label_tag }}</td>
+                    <td>
+                        {{ form.content.errors }}
+                        {{ form.content }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form.category.label_tag }}</td>
+                    <td>
+                        {{ form.category.errors }}
+                        {{ form.category }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ form.tags.label_tag }}</td>
+                    <td>
+                        {{ form.tags.errors }}
+                        {{ form.tags }}
+                    </td>
+                </tr>
+
+                {#  Show authors only if logged in user is a superuser  #}
+                {% if request.user.is_superuser %}
+                    <tr>
+                        <td>{{ form.author.label_tag }}</td>
+                        <td>
+                            {{ form.author.errors }}
+                            {{ form.author }}
+                        </td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Add Post"></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+{% endblock %}

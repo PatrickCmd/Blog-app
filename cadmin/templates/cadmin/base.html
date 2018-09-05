@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {{ static }}
+        <title>{% block title %}The Great Django Blog :: Admin Panel{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'cadmin/css/style.css' %}">
+    </head>
+    <body>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <div class="footer">
+            <div class="section-inner clearfix">
+                <p>&copy; The Great Django Blog</p>
+            </div>
+        </div>
+    
+    </body>
+</html>
